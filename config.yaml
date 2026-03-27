@@ -6,6 +6,6 @@ reference:
 	annotation: "/Volumes/Bibhu's SSD/RNA_seq/Reference_genome/ncbi_dataset/ncbi_dataset/data/GCF_000005845.2/genomic.gtf"
 
 files:
-	R1_pattern: "sample_*_1.fq.gz"
-	R2_pattern: "sample_*_2.fq.gz"
+	R1_pattern: "*_1.fq.gz"
+	R2_pattern: "*_2.fq.gz"
 
