@@ -1,0 +1,9 @@
+input_dir: 
+output_dir:
+
+reference:
+	genome:
+	annotation:
+
+files:
+	pattern: ""
