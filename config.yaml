@@ -1,11 +1,9 @@
 input_dir: "/volumes/Bibhu's SSD/RNA_seq/FASTQ"
-output_dir: 
+output_dir: "/Volumes/Bibhu's SSD/RNA_seq/Pipeline/Outputs"
 
 reference:
-	genome: "/Volumes/Bibhu's 
-SSD/RNA_seq/Reference_genome/ncbi_dataset/ncbi_dataset/data/GCF_000005845.2/._GCF_000005845.2_ASM584v2_genomic.fna"
-	annotation: "/Volumes/Bibhu's 
-SSD/RNA_seq/Reference_genome/ncbi_dataset/ncbi_dataset/data/GCF_000005845.2/._genomic.gtf"
+	genome: "/Volumes/Bibhu's SSD/RNA_seq/Reference_genome/ncbi_dataset/ncbi_dataset/data/GCF_000005845.2/GCF_000005845.2_ASM584v2_genomic.fna"
+	annotation: "/Volumes/Bibhu's SSD/RNA_seq/Reference_genome/ncbi_dataset/ncbi_dataset/data/GCF_000005845.2/genomic.gtf"
 
 files:
 	R1_pattern: "sample_*_1.fq.gz"
