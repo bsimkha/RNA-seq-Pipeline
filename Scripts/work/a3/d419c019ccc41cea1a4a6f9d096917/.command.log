@@ -1,0 +1,52 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 4856
+total bases: 484963
+Q20 bases: 484353(99.8742%)
+Q30 bases: 484353(99.8742%)
+Q40 bases: 0(0%)
+
+Read2 before filtering:
+total reads: 4856
+total bases: 484963
+Q20 bases: 484393(99.8825%)
+Q30 bases: 484393(99.8825%)
+Q40 bases: 0(0%)
+
+Read1 after filtering:
+total reads: 4856
+total bases: 484963
+Q20 bases: 484353(99.8742%)
+Q30 bases: 484353(99.8742%)
+Q40 bases: 0(0%)
+
+Read2 after filtering:
+total reads: 4856
+total bases: 484963
+Q20 bases: 484393(99.8825%)
+Q30 bases: 484393(99.8825%)
+Q40 bases: 0(0%)
+
+Filtering result:
+reads passed filter: 9712
+reads failed due to low quality: 0
+reads failed due to too many N: 0
+reads failed due to too short: 0
+reads failed due to adapter dimer: 0
+reads with adapter trimmed: 0
+bases trimmed due to adapters: 0
+
+Duplication rate: 0.53542%
+
+Insert size peak (evaluated by paired-end reads): 87
+
+JSON report: sample_R1.fastp.json
+HTML report: sample_R1.fastp.html
+
+fastp -i sample_R1_1.fq.gz -I sample_R1_2.fq.gz -o sample_R1_R1.trim.fq.gz -O sample_R1_R2.trim.fq.gz -j sample_R1.fastp.json -h sample_R1.fastp.html --detect_adapter_for_pe -w 4 
+fastp v1.3.0, time used: 0 seconds
