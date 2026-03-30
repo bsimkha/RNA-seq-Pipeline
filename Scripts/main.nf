@@ -1,6 +1,6 @@
 nextflow.enable.dsl = 2
 
-params.config_file = params.config_file ?: "/Volumes/Bibhus_SSD/RNA_seq/Pipeline/config.yaml"
+params.config_file = params.config_file ?: "/Users/bibhusimkhada/Desktop/RNA_seq/Pipeline/config.yaml"
 def cfg = new groovy.yaml.YamlSlurper().parse(new File(params.config_file))
 
 assert cfg.input_dir           : "Missing input_dir in ${params.config_file}"
@@ -57,19 +57,13 @@ process STAR_ALIGN {
 
     script:
     """
-    TMPDIR=\$(mktemp -d "${PWD}/${sample_id}.STAR.XXXXXX")
-    trap 'rm -rf "\$TMPDIR"' EXIT
-
     STAR \
     --runThreadN ${task.cpus} \
     --genomeDir "${params.star_index}" \
     --readFilesIn "${r1}" "${r2}" \
     --readFilesCommand zcat \
-    --outTmpDir "\$TMPDIR" \
     --outFileNamePrefix "${sample_id}." \
-    --outSAMtype BAM SortedByCoordinate \
-    --outSAMunmapped Within \
-    --outSAMattributes NH HI AS nM MD
+    --outSAMtype BAM SortedByCoordinate
     """
 }
 
