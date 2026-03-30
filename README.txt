@@ -1,6 +1,7 @@
 Before you begin make sure these dependenceies are poperly installed
   - NextFlow (Refuqires java version 17-25)
   - FastP
+  - STAR
 
 Step 1: Edit the config.yaml files to proper file paths
 
