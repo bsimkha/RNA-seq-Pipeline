@@ -1,17 +1,17 @@
 #Input directory for fastq files
-input_dir: "/Volumes/Bibhus_SSD/RNA_seq/FASTQ"
+input_dir: "/Users/bibhusimkhada/Desktop/RNA_seq/FASTQ"
 
 #Output directory for pipeline results
-output_dir: "/Volumes/Bibhus_SSD/RNA_seq/Pipeline/Outputs"
+output_dir: "/Users/bibhusimkhada/Desktop/RNA_seq/Pipeline/Outputs"
 
 #Specify the number of threads to use for parallel processing
 threads: 4
 
 #Reference genome and annotation files for annotation
 reference:
- genome: "/Volumes/Bibhus_SSD/RNA_seq/Reference_genome/ncbi_dataset/ncbi_dataset/data/GCF_000005845.2/GCF_000005845.2_ASM584v2_genomic.fna"
- annotation: "/Volumes/Bibhus_SSD/RNA_seq/Reference_genome/ncbi_dataset/ncbi_dataset/data/GCF_000005845.2/genomic.gtf"
- star_index: "/Volumes/Bibhus_SSD/RNA_seq/Reference_genome/star_index"
+ genome: "/Users/bibhusimkhada/Desktop/RNA_seq/Reference_genome/ncbi_dataset/ncbi_dataset/data/GCF_000005845.2/GCF_000005845.2_ASM584v2_genomic.fna"
+ annotation: "/Users/bibhusimkhada/Desktop/RNA_seq/Reference_genome/ncbi_dataset/ncbi_dataset/data/GCF_000005845.2/genomic.gtf"
+ star_index: "/Users/bibhusimkhada/Desktop/RNA_seq/Reference_genome/star_index"
 
 #Specify the formal for fastq files
 files:
