@@ -75,10 +75,27 @@ process BBDUK_RRNA {
     """
 }
 
+process FASTQC {
+    tag { sample_id }
+    cpus 2
+    publishDir "${params.output_dir}/3_fastqc", mode: 'copy', overwrite: true
+
+    input:
+    tuple val(sample_id), path(r1), path(r2)
+
+    output:
+    tuple val(sample_id), path("*.html"), path("*.zip")
+
+    script:
+    """
+    fastqc -t ${task.cpus} ${r1} ${r2}
+    """
+}
+
 process STAR_ALIGN {
     tag { sample_id }
     cpus params.threads
-    publishDir "${params.output_dir}/3_star", mode: 'copy', overwrite: true
+    publishDir "${params.output_dir}/4_star", mode: 'copy', overwrite: true
 
     input:
     tuple val(sample_id), path(r1), path(r2)
@@ -109,6 +126,8 @@ workflow {
     }
 
     rrna_filtered_ch = BBDUK_RRNA(rrna_input_ch)
+
+    FASTQC(rrna_filtered_ch)
 
     star_input_ch = rrna_filtered_ch.map { sample_id, r1, r2 ->
         tuple(sample_id, r1, r2)
