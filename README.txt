@@ -1,7 +1,10 @@
-Before you begin make sure these dependenceies are poperly installed
-  - NextFlow (Refuqires java version 17-25)
+Before you begin make sure these dependenceies are properly installed
+  - NextFlow (Requires java version 17-25)
   - FastP
+  - bbduk
+  - FastQC
   - STAR
+  - MultiQC
 
 Step 1: Edit the config.yaml files to proper file paths
 
