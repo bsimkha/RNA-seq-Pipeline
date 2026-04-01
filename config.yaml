@@ -17,6 +17,7 @@ reference:
 #Tools that needs to be loaded
 tools:
  bbduk: "/Users/bibhusimkhada/tools/bbmap_tools/bbduk.sh"
+ featurecounts: "/Users/bibhusimkhada/tools/subread-2.1.0-macOS-x86_64/bin/featureCounts"
 
 #Specify the formal for fastq files
 files:

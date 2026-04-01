@@ -9,6 +9,8 @@ assert cfg.files?.pattern         : "Missing files.pattern in ${params.config_fi
 assert cfg.reference?.star_index  : "Missing reference.star_index in ${params.config_file}"
 assert cfg.reference?.rRNA        : "Missing reference.rRNA in ${params.config_file}"
 assert cfg.tools?.bbduk           : "Missing tools.bbduk in ${params.config_file}"
+assert cfg.tools?.featurecounts   : "Missing tools.featurecounts in ${params.config_file}"
+assert cfg.reference?.annotation  : "Missing reference.annotation in ${params.config_file}"
 
 params.input_dir    = cfg.input_dir
 params.output_dir   = cfg.output_dir
@@ -17,6 +19,8 @@ params.read_pattern = cfg.files.pattern
 params.star_index   = cfg.reference.star_index
 params.rRNA         = cfg.reference.rRNA
 params.bbduk        = cfg.tools.bbduk
+params.featurecounts = cfg.tools.featurecounts
+params.gtf          = cfg.reference.annotation
 
 process FASTP {
     tag { sample_id }
@@ -116,6 +120,29 @@ process STAR_ALIGN {
     """
 }
 
+process FEATURECOUNTS {
+    tag { sample_id }
+    cpus 4
+    publishDir "${params.output_dir}/5_featurecounts", mode: 'copy', overwrite: true
+
+    input:
+    tuple val(sample_id), path(bam)
+
+    output:
+    tuple val(sample_id),
+          path("${sample_id}.counts.txt"),
+          path("${sample_id}.counts.txt.summary")
+
+    script:
+    """
+    ${params.featurecounts} \
+      -T ${task.cpus} \
+      -a "${params.gtf}" \
+      -o ${sample_id}.counts.txt \
+      ${bam}
+    """
+}
+
 workflow {
     read_pairs_ch = Channel.fromFilePairs("${params.input_dir}/${params.read_pattern}", size: 2, checkIfExists: true)
 
@@ -127,11 +154,13 @@ workflow {
 
     rrna_filtered_ch = BBDUK_RRNA(rrna_input_ch)
 
-    FASTQC(rrna_filtered_ch)
+    fastqc_out = FASTQC(rrna_filtered_ch)
 
     star_input_ch = rrna_filtered_ch.map { sample_id, r1, r2 ->
         tuple(sample_id, r1, r2)
     }
 
-    STAR_ALIGN(star_input_ch)
+    star_out = STAR_ALIGN(star_input_ch)
+
+    FEATURECOUNTS(star_out)
 }

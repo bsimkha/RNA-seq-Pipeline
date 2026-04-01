@@ -1,10 +1,10 @@
 Before you begin make sure these dependenceies are properly installed
   - NextFlow (Requires java version 17-25)
-  - FastP
-  - bbduk
+  - fastp
+  - bbmap
   - FastQC
   - STAR
-  - MultiQC
+  - featureCounts
 
 Step 1: Edit the config.yaml files to proper file paths
 
