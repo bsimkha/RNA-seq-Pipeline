@@ -1,23 +1,23 @@
 #Input directory for fastq files
-input_dir: "/Users/bibhusimkhada/Desktop/RNA_seq/FASTQ"
+input_dir: "/path/to/fastq/files"
 
 #Output directory for pipeline results
-output_dir: "/Users/bibhusimkhada/Desktop/RNA_seq/Pipeline/Outputs"
+output_dir: "/path/to/output/directory"
 
 #Specify the number of threads to use for parallel processing
 threads: 4
 
 #Reference genome and annotation files for annotation
 reference:
- genome: "/Users/bibhusimkhada/Desktop/RNA_seq/Reference_genome/ncbi_dataset/ncbi_dataset/data/GCF_000005845.2/GCF_000005845.2_ASM584v2_genomic.fna"
- annotation: "/Users/bibhusimkhada/Desktop/RNA_seq/Reference_genome/ncbi_dataset/ncbi_dataset/data/GCF_000005845.2/genomic.gtf"
- star_index: "/Users/bibhusimkhada/Desktop/RNA_seq/Reference_genome/star_index"
- rRNA: "/Users/bibhusimkhada/Desktop/RNA_seq/Reference_genome/rRNA/rrna.fasta"
+ genome: "/path/to/reference/genome/"
+ annotation: "/path/to/reference/genome.gtf"
+ star_index: "/path/to/reference/genome/star_index"
+ rRNA: "/path/to/reference/rrna.fasta"
 
 #Tools that needs to be loaded
 tools:
- bbduk: "/Users/bibhusimkhada/tools/bbmap_tools/bbduk.sh"
- featurecounts: "/Users/bibhusimkhada/tools/subread-2.1.0-macOS-x86_64/bin/featureCounts"
+ bbduk: "/path/to/tools/bbmap_tools/bbduk.sh"
+ featurecounts: "/path/to/tools/subread-2.1.0-macOS-x86_64/bin/featureCounts"
 
 #Specify the formal for fastq files
 files:
