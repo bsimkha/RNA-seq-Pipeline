@@ -122,7 +122,7 @@ process STAR_ALIGN {
 
 process FEATURECOUNTS {
     tag { sample_id }
-    cpus 4
+    cpus params.threads
     publishDir "${params.output_dir}/5_featurecounts", mode: 'copy', overwrite: true
 
     input:
@@ -143,6 +143,50 @@ process FEATURECOUNTS {
     """
 }
 
+process MERGE_COUNTS {
+    tag "merge_counts"
+    cpus params.threads
+    publishDir "${params.output_dir}/6_counts_matrix", mode: 'copy', overwrite: true
+
+    input:
+    path(count_files)
+
+    output:
+    path("combined_counts.txt")
+
+    script:
+    """
+    cat > merge_counts.R << 'RS'
+    files <- list.files()
+    files <- files[endsWith(files, ".counts.txt")]
+
+    dfs <- lapply(files, function(f) {
+      read.table(f, sep = "\\t", header = TRUE, comment.char = "#", check.names = FALSE)
+    })
+
+    counts <- do.call(cbind, lapply(dfs, function(df) df[, 7, drop = FALSE]))
+    ref <- dfs[[1]]
+
+    result <- data.frame(
+      Geneid = ref[, 1],
+      length = ref[, 6],
+      counts,
+      check.names = FALSE
+    )
+
+    colnames(result) <- c(
+      "Geneid",
+      "length",
+      sub("_counts.txt", "", basename(files), fixed = TRUE)
+    )
+
+    write.table(result, "combined_counts.txt", sep = "\\t", quote = FALSE, row.names = FALSE)
+    RS
+
+    Rscript merge_counts.R
+    """
+}
+
 workflow {
     read_pairs_ch = Channel.fromFilePairs("${params.input_dir}/${params.read_pattern}", size: 2, checkIfExists: true)
 
@@ -154,7 +198,7 @@ workflow {
 
     rrna_filtered_ch = BBDUK_RRNA(rrna_input_ch)
 
-    fastqc_out = FASTQC(rrna_filtered_ch)
+    FASTQC(rrna_filtered_ch)
 
     star_input_ch = rrna_filtered_ch.map { sample_id, r1, r2 ->
         tuple(sample_id, r1, r2)
@@ -162,5 +206,9 @@ workflow {
 
     star_out = STAR_ALIGN(star_input_ch)
 
-    FEATURECOUNTS(star_out)
+    per_sample_counts = FEATURECOUNTS(star_out)
+
+    count_files = per_sample_counts.map { sample_id, counts, summary -> counts }.collect()
+
+    MERGE_COUNTS(count_files)
 }
