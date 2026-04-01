@@ -1,5 +1,5 @@
 # RNA-seq pipeline
-This pipeline was built in **Nextflow DSL2**, and performs end-to-end processing of pair-ended **RNA-seq FASTQ files**. Processing include trimming, rNRA filtering, QC, alignment, and gene quantification
+This pipeline was built in **Nextflow DSL2**, and performs end-to-end processing of pair-ended **RNA-seq FASTQ files**. Processing include trimming, rRNA filtering, QC, alignment, and gene quantification
 
 ## Overview
 This pipeline automates the following steps:
