@@ -1,6 +1,6 @@
 nextflow.enable.dsl = 2
 
-params.config_file = params.config_file ?: "/Users/bibhusimkhada/Desktop/RNA_seq/Pipeline/config.yaml"
+params.config_file = params.config_file ?: "path/to/config.yaml"
 def cfg = new groovy.yaml.YamlSlurper().parse(new File(params.config_file))
 
 assert cfg.input_dir              : "Missing input_dir in ${params.config_file}"
